@@ -103,14 +103,18 @@ a:hover.as-text {
     height: 100%;
 }
 #map-sidebar, #map-layers {
-    z-index: 9;
+    z-index: 3000;
     width: 100%;
     display: block;
     background: rgba(255,255,255,0.4);
     font-size: 130%;
 
+    position: absolute;
     height: 100%;
     overflow-y: scroll;
+}
+#map-layers {
+    padding-left: 150px;
 }
 
 @media screen and (min-width: 768px) {
@@ -177,6 +181,9 @@ a:hover.as-text {
         right: 30px;
         top: 70px;
     }
+}
+@media screen and (max-width: 767px) {
+    .row {margin: 0;}
 }
 
 
