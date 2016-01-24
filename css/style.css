@@ -93,11 +93,37 @@ a:hover.as-text {
 
 
 
-#map {
+.map-container {
     position:fixed;
-    height:100%;
-    width:100%;
+    top: 50px; bottom: 0;
+    right: 0; left: 0;
     z-index: 1;
+    overflow-y: scroll;
+}
+
+#map {
+    height: 100%;
+}
+#map-sidebar, #map-layers {
+    z-index: 9;
+    width: 100%;
+    display: block;
+    background: rgba(255,255,255,0.4);
+    font-size: 130%;
+}
+
+@media screen and (min-width: 768px) {
+    #map-sidebar, #map-layers {
+        position: relative;
+        float: left;
+        width: 250px;
+        height: 100%;
+        overflow: auto;
+    }
+    #map-layers {
+        float: right;
+    }
+
 }
 
 
