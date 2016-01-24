@@ -99,14 +99,16 @@ a:hover.as-text {
     right: 0; left: 0;
     z-index: 1;
 }
+.sidebar-inner {padding: 15px;}
+.map-container .close {font-size: 300%;}
 #map {
     height: 100%;
 }
 #map-sidebar, #map-layers {
     z-index: 3000;
-    width: 100%;
+    max-width: 250px;
     display: block;
-    background: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.6);
     font-size: 130%;
 
     position: absolute;
@@ -114,14 +116,15 @@ a:hover.as-text {
     overflow-y: scroll;
 }
 #map-layers {
-    padding-left: 150px;
+    right:0;
+    width: 250px;
+    text-align: right;
 }
 
 @media screen and (min-width: 768px) {
     #map-sidebar, #map-layers {
         position: relative;
         float: left;
-        width: 250px;
         height: 100%;
         overflow: auto;
     }
