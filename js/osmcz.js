@@ -17,6 +17,8 @@ function initmap() {
     // -------------------- modules --------------------
     new osmcz.guideposts(map, baseLayers, overlays, controls);
 
+    new osmcz.activeLayer(map, baseLayers, overlays, controls);
+
     // -------------------- map state --------------------
 
     // set location from hash OR remembered cookie OR deafult home
