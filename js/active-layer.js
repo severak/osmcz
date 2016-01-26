@@ -109,34 +109,42 @@ osmcz.activeLayer = function(map, baseLayers, overlays, controls) {
             xhr.abort();
         }
 
+        layer_activeMarkers.clearLayers();
+        activeMarkers.clearLayers();
+        map.addLayer(activeMarkers);
+
         if (map.getZoom() > 15) {
 
             var geoJsonUrl = 'http://tile.poloha.net/json';
 
             // TODO: Get bounds, split to tiles and download json files for all tiles
+            console.log("getSize(): " +map.getSize());
+            var max_x = map.getSize().x;
+            var max_y = map.getSize().y;
+            for (x = 0; x <= max_x + 256; x = x +256 ){
+              for (y = 0; y <= max_y + 256; y = y +256 ){
+                console.log("x: " + x + " / y: " + y);
+                var ll = map.containerPointToLatLng(L.point(x, y));
 
-            // Demo - only center tile ;-)
-            oneTileUrl = getTileURL(geoJsonUrl, map.getCenter().lat, map.getCenter().lng, map.getZoom());
+                oneTileUrl = getTileURL(geoJsonUrl, ll.lat, ll.lng, map.getZoom());
 
-            xhr = $.ajax({
-                url: oneTileUrl,
-                dataType: "text",
-                success: retrieve_geojson,
-                error: error_gj
-            });
-
-        } else {
-            layer_activeMarkers.clearLayers();
+                xhr = $.ajax({
+                    url: oneTileUrl,
+                    dataType: "text",
+                    success: retrieve_geojson,
+                    error: error_gj
+                });
+              }
+            }
         }
     }
 
     function retrieve_geojson(data) {
         console.log("Data: " + data);
+//         layer_activeMarkers.clearLayers();
+        layer_activeMarkers.addData(JSON.parse(data));
         activeMarkers.clearLayers();
-        layer_activeMarkers.clearLayers();
-         layer_activeMarkers.addData(JSON.parse(data));
         activeMarkers.addLayer(layer_activeMarkers);
-        map.addLayer(activeMarkers);
     }
 
     function error_gj(data) {
