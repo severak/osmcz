@@ -31,18 +31,20 @@ osmcz.activeLayer = function(map, baseLayers, overlays, controls) {
     var activeMarkers = L.markerClusterGroup({code: 'A'});
 
     var active_icon = L.icon({
-      icon: "glyphicon glyphicon-asterisk"
+      iconUrl: "https://raw.githubusercontent.com/openstreetmap/josm/mirror/images/info.png"
     });
 
     var layer_activeMarkers = new L.GeoJSON(null, {
         onEachFeature: function (feature, layer) {
-        console.log("feature: " + feature);
+          console.log("feature: " + feature);
             console.log("layer_activeMarkers");
             var html_content = "<table>";
 
-            for (var k in feature.properties) {
-                var v = String(feature.properties[k]);
-                popupContent += "<tr><td>" + k + "</td><td>" + v + "</td></tr>" ;
+            html_content += "<tr><td>" + "osm_type" + "</td><td>" + feature.properties.osm_type + "</td></tr>" ;
+            html_content += "<tr><td>" + "osm_id" + "</td><td>" + feature.properties.osm_id + "</td></tr>" ;
+            for (var k in feature.properties.tags) {
+                var v = String(feature.properties.tags[k]);
+                html_content += "<tr><td>" + k + "</td><td>" + v + "</td></tr>" ;
             }
             html_content += "</table>";
 
