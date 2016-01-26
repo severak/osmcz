@@ -36,7 +36,7 @@ osmcz.activeLayer = function(map, baseLayers, overlays, controls) {
 
     var layer_activeMarkers = new L.GeoJSON(null, {
         onEachFeature: function (feature, layer) {
-
+        console.log("feature: " + feature);
             console.log("layer_activeMarkers");
             var html_content = "<table>";
 
@@ -114,11 +114,11 @@ osmcz.activeLayer = function(map, baseLayers, overlays, controls) {
             // TODO: Get bounds, split to tiles and download json files for all tiles
 
             // Demo - only center tile ;-)
-            console.log("Lat: " + map.getCenter().lat + " / Lon: " + map.getCenter().lng);
             oneTileUrl = getTileURL(geoJsonUrl, map.getCenter().lat, map.getCenter().lng, map.getZoom());
 
             xhr = $.ajax({
                 url: oneTileUrl,
+                dataType: "text",
                 success: retrieve_geojson,
                 error: error_gj
             });
@@ -129,9 +129,10 @@ osmcz.activeLayer = function(map, baseLayers, overlays, controls) {
     }
 
     function retrieve_geojson(data) {
+        console.log("Data: " + data);
         activeMarkers.clearLayers();
         layer_activeMarkers.clearLayers();
-        layer_activeMarkers.addData(JSON.parse(data));
+         layer_activeMarkers.addData(JSON.parse(data));
         activeMarkers.addLayer(layer_activeMarkers);
         map.addLayer(activeMarkers);
     }
