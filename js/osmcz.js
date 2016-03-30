@@ -52,11 +52,11 @@ function initmap() {
     });
 
     // remember last location in hash AND cookie
-    map.on('moveend zoomend layeradd layerremove', function () {
+    /*map.on('moveend zoomend layeradd layerremove', function () {
         lastHash = OSM.formatHash(map)
         location.hash = lastHash;
         Cookies.set("_osm_location", OSM.locationCookie(map), {expires: 31});
-    });
+    });*/
 
 
     // when baselayer out of max zoom - zoom it correctly
